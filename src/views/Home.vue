@@ -1,7 +1,11 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>BATTLE <img alt="Vue logo" src="../assets/logo.png"> CARDZ</h1>
+    <form>
+      <input name="name" type="text" placeholder="Name">
+      <button type="submit">Enter</button>
+    </form>
+    <button class="btn btn-success">Start Game</button>
   </div>
 </template>
 
