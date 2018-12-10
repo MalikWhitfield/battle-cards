@@ -9,17 +9,21 @@
                 <opponent></opponent>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 mb-5 mt-5">
-            <h1>{{game.player.name}}</h1>
+        <div class="row" v-if="this.playerCardId && this.opponentCardId">
+            <div class="col-12">
+                <button @click="fight">FIGHT</button>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-8">
-            <player></player>
+        <div class="row">
+            <div class="col-12 mb-5 mt-5">
+                <h1>{{game.player.name}}</h1>
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-8">
+                <player></player>
+            </div>
+        </div>
     </div>
 </template>
 <!-- //might be easier to have a player component and opponent component that has each name, card
@@ -46,9 +50,25 @@
         computed: {
             game() {
                 return this.$store.state.game
+            },
+            playerCardId() {
+                return this.$store.state.PlayerCardId
+            },
+            opponentCardId() {
+                return this.$store.state.OpponentCardId
             }
         },
-        methods: {}
+        methods: {
+            fight() {
+                this.$store.dispatch("fight", {
+                    attack: {
+                        playerCardId: this.playerCardId,
+                        opponentCardId: this.opponentCardId
+                    },
+                    gameId: this.game.id
+                })
+            }
+        }
     }
 
 </script>

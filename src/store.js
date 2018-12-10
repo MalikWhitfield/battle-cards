@@ -30,10 +30,10 @@ export default new Vuex.Store({
       state.game = game
     },
     SETACTIVEPLAYERCARD(state, playerCardId) {
-      state.playerCardId = playerCardId
+      state.PlayerCardId = playerCardId
     },
     SETACTIVEOPPONENTCARD(state, opponentCardId) {
-      state.opponentCardId = opponentCardId
+      state.OpponentCardId = opponentCardId
     }
   },
   actions: {
@@ -66,10 +66,13 @@ export default new Vuex.Store({
           router.push({ name: 'game', params: { gameId: game.id } })
         })
     },
-    fight({ commit }, payload) {
-      gameApi.put('/games' + payload.gameId, payload.attack)
+    fight({ dispatch }, payload) {
+      gameApi.put('/' + payload.gameId, payload.attack)
         .then(res => {
-          commit('SETGAME', res.data)
+          dispatch('getGame', payload.gameId)
+        })
+        .catch(err => {
+          console.log('fight error', err)
         })
     },
     attackedCard({ commit }, activeOpponentCardId) {

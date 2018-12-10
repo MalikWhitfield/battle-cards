@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-12 d-flex">
         <div
-          @v-on:click="$emit('setActiveOpponent', card.id); opponentId=card.id"
-          :class="{'border-success' : opponnetId = card.id}"
+          v-on:click="setActiveOpponent(card.id)"
+          :class="{'border-success' : opponnentId = card.id}"
           v-if="fromOpponent"
           v-for="card in cards"
           :key="card.id"
@@ -21,21 +21,17 @@
               </div>
             </div>
           </div>
-          <div v-if="!visible">
+          <div v-else>
             <img src="https://pbs.twimg.com/media/DTTz_U9UQAEMua7.jpg" height="150px">
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <button @click="fight">FIGHT</button>
-        </div>
-      </div>
     </div>
+
     <div class="row">
       <div class="col-12 d-flex">
         <div
-          @v-on:click="$emit('setActivePlayer', card.id); playerId=card.id"
+          v-on:click="setActivePlayer(card.id)"
           :class="{'border-success' : playerId = card.id}"
           v-if="!fromOpponent"
           v-for="card in cards"
@@ -86,7 +82,14 @@ export default {
       return this.$store.state.game;
     }
   },
-  methods: {}
+  methods: {
+    setActiveOpponent(cardId) {
+      this.$store.commit("SETACTIVEOPPONENTCARD", cardId);
+    },
+    setActivePlayer(cardId) {
+      this.$store.commit("SETACTIVEPLAYERCARD", cardId);
+    }
+  }
 };
 </script>
 
