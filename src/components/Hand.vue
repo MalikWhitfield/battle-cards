@@ -10,8 +10,8 @@
           v-for="card in cards"
           :key="card.id"
         >
-          <div v-if="visible">
-            <div class="card cardImgBg" style="width: 150px; height: 150px">
+          <div v-if="card.visible">
+            <div class="card cardImgBg" style="width: 250px; height: 250px">
               <h5>{{card.name}}</h5>
               <img class="card-img-top" :src="card.img" alt="Card image cap">
               <div class="card-body cardBodyBg">
@@ -22,7 +22,7 @@
             </div>
           </div>
           <div v-else>
-            <img src="https://pbs.twimg.com/media/DTTz_U9UQAEMua7.jpg" height="150px">
+            <img src="https://pbs.twimg.com/media/DTTz_U9UQAEMua7.jpg" height="250px">
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
           v-for="card in cards"
           :key="card.id"
         >
-          <div class="card cardImgBg" style="width: 150px; height: 150px">
+          <div class="card cardImgBg" style="width: 250px; height: 250px">
             <h5>{{card.name}}</h5>
             <img class="card-img-top" :src="card.img" alt="Card image cap">
             <div class="card-body cardBodyBg">
