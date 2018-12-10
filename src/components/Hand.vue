@@ -4,11 +4,11 @@
       <div class="col-12 d-flex">
         <div
           v-on:click="setActiveOpponent(card.id)"
+          class="border"
           :class="{'border-success' : opponnentId = card.id}"
           v-if="fromOpponent"
           v-for="card in cards"
           :key="card.id"
-          class="border"
         >
           <div v-if="visible">
             <div class="card cardImgBg" style="width: 150px; height: 150px">
@@ -32,11 +32,11 @@
       <div class="col-12 d-flex">
         <div
           v-on:click="setActivePlayer(card.id)"
+          class="border"
           :class="{'border-success' : playerId = card.id}"
           v-if="!fromOpponent"
           v-for="card in cards"
           :key="card.id"
-          class="border"
         >
           <div class="card cardImgBg" style="width: 150px; height: 150px">
             <h5>{{card.name}}</h5>

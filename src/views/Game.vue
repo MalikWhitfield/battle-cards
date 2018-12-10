@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <h1>{{game.opponent.name}}</h1>
+                <h4>Remaining Cards: {{game.opponent.remainingCards}}</h4>
             </div>
             <div class="col-8">
                 <opponent></opponent>
@@ -17,6 +18,7 @@
         <div class="row">
             <div class="col-12 mb-5 mt-5">
                 <h1>{{game.player.name}}</h1>
+                <h4>Remaining Cards: {{game.player.remainingCards}}</h4>
             </div>
         </div>
         <div class="row">
