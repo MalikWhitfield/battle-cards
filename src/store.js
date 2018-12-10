@@ -12,51 +12,71 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     playerName: '',
-    playerCards: [],
-    opponentCards: [],
+    PlayerCardId: '',
+    OpponentCardId: '',
     game: {}
   },
   mutations: {
-    SETDECKS(state, decks){ 
+    SETDECKS(state, decks) {
       state.decks = decks
     },
-    SETPLAYERCARDS(state, playerCards){
+    SETPLAYERCARDS(state, playerCards) {
       state.playerCards = playerCards
     },
-    SETOPPONENTCARDS(state, opponentCards){
+    SETOPPONENTCARDS(state, opponentCards) {
       state.opponentCards = opponentCards
     },
-    SETGAME(state, game){
+    SETGAME(state, game) {
       state.game = game
+    },
+    SETACTIVEPLAYERCARD(state, playerCardId) {
+      state.playerCardId = playerCardId
+    },
+    SETACTIVEOPPONENTCARD(state, opponentCardId) {
+      state.opponentCardId = opponentCardId
     }
   },
   actions: {
-    getAllDecks({ commit }){
+    getAllDecks({ commit }) {
       gameApi.get('decks')
-      .then(res => {
-        console.log('decks', res.data)
-        commit('SETDECKS', res.data)
-      })
+        .then(res => {
+          console.log('decks', res.data)
+          commit('SETDECKS', res.data)
+        })
     },
-    getPlayerCards({ commit }, gameId){
+    getPlayerCards({ commit }, gameId) {
       gameApi.get('playerCards')
-      .then(res => {
-        console.log('playerCards', res.data)
-        commit('SETPLAYERCARDS', res.data)
-      })
+        .then(res => {
+          console.log('playerCards', res.data)
+          commit('SETPLAYERCARDS', res.data)
+        })
     },
-    startGame({ commit }, newGame){
-      gameApi.post('/games', newGame)
-      .then(res => {
-        commit('SETGAME', res.data.game)
-        router.push({ name: 'game', params: {gameId: res.data.game_id}})
-      })
+    getGame({ commit }, gameId) {
+      gameApi.get('/' + gameId)
+        .then(res => {
+          console.log('getGame', res.data.data)
+          commit('SETGAME', res.data.data)
+        })
     },
-    fight({commit}, payload){
+    startGame({ commit }, newGame) {
+      gameApi.post('', newGame)
+        .then(res => {
+          console.log('game data', res.data)
+          let game = res.data.game
+          router.push({ name: 'game', params: { gameId: game.id } })
+        })
+    },
+    fight({ commit }, payload) {
       gameApi.put('/games' + payload.gameId, payload.attack)
-      .then(res => {
-        commit('SETGAME', res.data)
-      })
+        .then(res => {
+          commit('SETGAME', res.data)
+        })
+    },
+    attackedCard({ commit }, activeOpponentCardId) {
+      commit('SETACTIVEOPPONENTCARD', activeOpponentCardId)
+    },
+    playerCard({ commit }, activePlayerCardId) {
+      commit('SETACTIVEPLAYERCARD', activePlayerCardId)
     }
 
   }
