@@ -28,7 +28,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <button>FIGHT</button>
+          <button @click="fight">FIGHT</button>
         </div>
       </div>
     </div>
